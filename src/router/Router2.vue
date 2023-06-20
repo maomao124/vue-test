@@ -110,7 +110,7 @@ const routes = [
 const router = createRouter({
   //内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
   history: createWebHashHistory(),
-  routes:[]
+  routes: []
 })
 
 
@@ -127,6 +127,22 @@ for (let i = 0; i < routes.length; i++)
     component: () => import(`@/${r.component}.vue`)
   })
   console.log("添加" + r.path)
+}
+
+/**
+ * 重置路由
+ */
+export function resetRouter()
+{
+  for (let i = 0; i < routes.length; i++)
+  {
+    const r = routes[i];
+    if (r.id === 999)
+    {
+      break;
+    }
+    router.removeRoute(r.id);
+  }
 }
 
 export default router

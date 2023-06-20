@@ -4,7 +4,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 
 
 //此数据可以从后端获取
-const routes = [
+let routes = [
   {
     id: 1,
     path: '/',
@@ -113,21 +113,30 @@ const router = createRouter({
   routes: []
 })
 
-
-for (let i = 0; i < routes.length; i++)
+/**
+ * 添加路由
+ * @param array 数组
+ */
+function addRoutes(array)
 {
-  const r = routes[i];
-  // 动态添加路由
-  // 参数1：父路由名称
-  // 参数2：路由信息对象
-  router.addRoute("a", {
-    path: r.path,
-    name: r.id,
-    //记住符号是 ` 而不是 ' 或者 "
-    component: () => import(`@/${r.component}.vue`)
-  })
-  console.log("添加" + r.path)
+  for (let i = 0; i < array.length; i++)
+  {
+    const r = array[i];
+    // 动态添加路由
+    // 参数1：父路由名称
+    // 参数2：路由信息对象
+    router.addRoute("a", {
+      path: r.path,
+      name: r.id,
+      //记住符号是 ` 而不是 ' 或者 "
+      component: () => import(`@/${r.component}.vue`)
+    })
+    console.log("添加" + r.path)
+    routes = array;
+  }
 }
+
+addRoutes(routes);
 
 /**
  * 重置路由
@@ -143,6 +152,28 @@ export function resetRouter()
     }
     router.removeRoute(r.id);
   }
+}
+
+/**
+ * 从SessionStorage里加载路由信息
+ */
+export function loadFromSessionStorage()
+{
+  console.log('从SessionStorage里加载路由信息')
+  console.log(router.getRoutes().length)
+
+  const result = JSON.parse(sessionStorage.getItem("router"))
+  console.log(result)
+  addRoutes(result);
+}
+
+/**
+ * 保存路由信息到SessionStorage
+ */
+export function saveToSessionStorage()
+{
+  console.log("保存路由到SessionStorage")
+  sessionStorage.setItem("router", JSON.stringify(routes))
 }
 
 export default router

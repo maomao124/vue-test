@@ -4,7 +4,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 import App from './App26.vue'
-import Router2 from '@/router/Router4'
+import Router2 from '@/router/Router5'
 
 const app = createApp(App)
 

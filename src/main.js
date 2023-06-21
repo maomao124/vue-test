@@ -3,8 +3,8 @@ import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-import App from './App25.vue'
-import Router2 from '@/router/Router3'
+import App from './App26.vue'
+import Router2 from '@/router/Router4'
 
 const app = createApp(App)
 

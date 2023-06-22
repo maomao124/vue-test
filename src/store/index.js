@@ -44,7 +44,29 @@ const store = createStore({
             {
                 console.log("取age ：" + state.age)
                 return state.age;
-            }
+            },
+            getCount3: (state) => (name) =>
+            {
+                console.log("当前名字：" + name)
+                if (state.count > 10)
+                {
+                    console.log("大于10，返回10")
+                    return 10;
+                }
+                return state.count;
+            },
+            getName3: (state) => (age) =>
+            {
+                console.log("当前年龄：" + age)
+                console.log("取name ：" + state.name)
+                return state.name;
+            },
+            getAge3: (state) => (count) =>
+            {
+                console.log("当前计数：" + count)
+                console.log("取age ：" + state.age)
+                return state.age;
+            },
         }
 })
 

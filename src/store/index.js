@@ -23,7 +23,29 @@ const store = createStore({
         {
             state.age = age;
         }
-    }
+    },
+    getters:
+        {
+            getCount2(state)
+            {
+                if (state.count > 10)
+                {
+                    console.log("大于10，返回10")
+                    return 10;
+                }
+                return state.count;
+            },
+            getName2(state)
+            {
+                console.log("取name ：" + state.name)
+                return state.name;
+            },
+            getAge2(state)
+            {
+                console.log("取age ：" + state.age)
+                return state.age;
+            }
+        }
 })
 
 export default store;

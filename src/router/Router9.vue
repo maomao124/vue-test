@@ -22,6 +22,17 @@ import App18 from '@/App18'
 import App19 from '@/App19'
 import NotFound from '@/views/404'
 
+function f1()
+{
+  console.log("第一个路由独享的守卫")
+  return true;
+}
+
+function f2()
+{
+  console.log("第二个路由独享的守卫")
+  return true;
+}
 
 const routes = [
   {
@@ -43,7 +54,8 @@ const routes = [
           r1: App6,
           r2: App7,
           r3: App8,
-        }
+        },
+    beforeEnter: [f1, f2]
   },
   {
     path: '/app9',
@@ -53,7 +65,19 @@ const routes = [
           r1: App10,
           r2: App11,
           r3: App12,
-        }
+        },
+    beforeEnter: (to, from) =>
+    {
+      console.log("从" + from.path + "到" + to.path)
+      //0.5的概率放行
+      if (Math.random() > 0.5)
+      {
+        console.log("放行")
+        return true
+      }
+      console.log("不放行")
+      return false
+    }
   },
   {
     path: '/app13',
@@ -62,7 +86,8 @@ const routes = [
   },
   {
     path: '/app14',
-    component: App14
+    component: App14,
+    beforeEnter: [f1, f2]
   },
   {
     path: '/app15',
@@ -101,47 +126,6 @@ const router = createRouter({
   routes, // `routes: routes` 的缩写
 })
 
-router.beforeEach((to, from) =>
-{
-  console.log("第一个全局前置守卫")
-  if (to.path === "/404")
-  {
-    return true;
-  }
-  //0.5的概率放行
-  if (Math.random() > 0.5)
-  {
-    console.log("放行")
-    return true
-  }
-  console.log("不放行")
-  return false
-})
-
-router.beforeEach((to, from) =>
-{
-  console.log("第二个全局前置守卫")
-  if (to.path === "/404")
-  {
-    return true;
-  }
-  if (Math.random() > 0.5)
-  {
-    console.log("放行")
-    return true
-  }
-  else
-  {
-    console.log("转/app9")
-    return {path: '/app9'}
-  }
-})
-
-router.afterEach((to, from) =>
-{
-  console.log("全局后置钩子")
-  console.log("从" + from.path + "到" + to.path)
-})
 
 export default router
 

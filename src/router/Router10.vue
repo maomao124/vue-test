@@ -114,6 +114,7 @@ const routes = [
   {
     path: '/app27',
     component: App_27,
+    meta: {a: 131234, b: 666666}
   },
   {
     path: '/404',

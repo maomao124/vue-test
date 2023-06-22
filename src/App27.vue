@@ -1,6 +1,8 @@
 <template>
   <h1>组件内的守卫</h1>
-  <h2>{{ $route.query.id }}</h2>
+  <h2>id={{ $route.query.id }}</h2>
+  <h2>a={{ $route.meta.a }}</h2>
+  <h2>b={{ $route.meta.b }}</h2>
 </template>
 
 <script>
@@ -15,12 +17,14 @@ export default {
       id: this.$route.query.id
     }
   },
-  beforeRouteEnter: (to, from) =>
+  beforeRouteEnter(to, from)
   {
     // 在渲染该组件的对应路由被验证前调用
     // 不能获取组件实例 `this` ！
     // 因为当守卫执行时，组件实例还没被创建！
     console.log("执行 beforeRouteEnter 方法")
+    console.log(to.meta.a)
+    console.log(to.meta.b)
   },
   beforeRouteUpdate: (to, from) =>
   {

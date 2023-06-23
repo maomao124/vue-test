@@ -104,6 +104,25 @@ const store = createStore({
                     console.log("增加count")
                     commit('increment')
                 }, 1000)
+            },
+            [INCREMENT_ASYNC + "2"]({commit})
+            {
+                return new Promise(((resolve, reject) =>
+                {
+                    setTimeout(() =>
+                    {
+                        //0.5的概率成功
+                        if (Math.random() > 0.5)
+                        {
+                            commit('increment')
+                            resolve()
+                        }
+                        else
+                        {
+                            reject("失败");
+                        }
+                    }, 1000)
+                }))
             }
         }
 })

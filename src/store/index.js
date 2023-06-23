@@ -11,7 +11,7 @@ const store = createStore({
         }
     },
     mutations: {
-        increment(state)
+        /*increment(state)
         {
             state.count++
         },
@@ -22,6 +22,18 @@ const store = createStore({
         updateAge(state, age)
         {
             state.age = age;
+        }*/
+        increment(state)
+        {
+            state.count++
+        },
+        updateName(state, payload)
+        {
+            state.name = payload.name;
+        },
+        updateAge(state, payload)
+        {
+            state.age = payload.age;
         }
     },
     getters:

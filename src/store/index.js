@@ -1,4 +1,5 @@
 import {createStore} from 'vuex'
+import {ADD_COUNT, UPDATE_AGE, UPDATE_NAME} from '@/store/mutation-types'
 
 // 创建一个新的 store 实例
 const store = createStore({
@@ -34,7 +35,19 @@ const store = createStore({
         updateAge(state, payload)
         {
             state.age = payload.age;
-        }
+        },
+        [ADD_COUNT](state)
+        {
+            state.count++
+        },
+        [UPDATE_NAME](state, payload)
+        {
+            state.name = payload.name;
+        },
+        [UPDATE_AGE](state, payload)
+        {
+            state.age = payload.age;
+        },
     },
     getters:
         {

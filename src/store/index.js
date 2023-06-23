@@ -1,5 +1,6 @@
 import {createStore} from 'vuex'
 import {ADD_COUNT, UPDATE_AGE, UPDATE_NAME} from '@/store/mutation-types'
+import {INCREMENT_ASYNC} from '@/store/actions-types'
 
 // 创建一个新的 store 实例
 const store = createStore({
@@ -92,6 +93,18 @@ const store = createStore({
                 console.log("取age ：" + state.age)
                 return state.age;
             },
+        },
+    actions:
+        {
+            [INCREMENT_ASYNC]({commit})
+            {
+                console.log("开始异步增加count")
+                setTimeout(() =>
+                {
+                    console.log("增加count")
+                    commit('increment')
+                }, 1000)
+            }
         }
 })
 
